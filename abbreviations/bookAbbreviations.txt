@@ -60,18 +60,18 @@
 10	Second Samuel
 10	Second Sam.
 11	1 Kings
-11	1 Kgs
-11	1 Ki
-11	1Kgs
-11	1Kin
-11	1Ki
-11	1K
-11	I Kgs
-11	I Ki
+11	1 Kgs.
+11	1 Ki.
+11	1Kgs.
+11	1Kin.
+11	1Ki.
+11	1K.
+11	I Kgs.
+11	I Ki.
 11	1st Kings
-11	1st Kgs
+11	1st Kgs.
 11	First Kings
-11	First Kgs
+11	First Kgs.
 12	2 Kings
 12	2 Kgs.
 12	2 Ki.
@@ -133,13 +133,14 @@
 19	Psm.
 19	Pss.
 20	Proverbs
-20	Prov
+20	Prov.
 20	Pro.
 20	Prv.
 20	Pr.
 21	Ecclesiastes
 21	Eccles.
 21	Eccle.
+21	Eccl.
 21	Ecc.
 21	Ec.
 21	Qoh.
@@ -173,11 +174,14 @@
 28	Hos.
 28	Ho.
 29	Joel
+29	Joe.
 29	Jl.
 30	Amos
+30	Amo.
 30	Am.
 31	Obadiah
 31	Obad.
+31	Oba.
 31	Ob.
 32	Jonah
 32	Jnh.
@@ -207,22 +211,23 @@
 39	Ml.
 40	Matthew
 40	Matt.
+40	Mat.
 40	Mt.
 41	Mark
-41	Mrk
-41	Mar
-41	Mk
-41	Mr
+41	Mrk.
+41	Mar.
+41	Mk.
+41	Mr.
 42	Luke
-42	Luk
-42	Lk
+42	Luk.
+42	Lk.
 43	John
-43	Joh
-43	Jhn
-43	Jn
+43	Joh.
+43	Jhn.
+43	Jn.
 44	Acts
-44	Act
-44	Ac
+44	Act.
+44	Ac.
 45	Romans
 45	Rom.
 45	Ro.
@@ -256,6 +261,7 @@
 49	Eph.
 49	Ephes.
 50	Philippians
+50	Philip.
 50	Phil.
 50	Php.
 50	Pp.
@@ -321,17 +327,19 @@
 55	Second Timothy
 55	Second Tim.
 56	Titus
-56	Tit
-56	ti
+56	Tit.
+56	ti.
 57	Philemon
 57	Philem.
+57	Phlm.
 57	Phm.
 57	Pm.
 58	Hebrews
 58	Heb.
 59	James
-59	Jas
-59	Jm
+59	Jam.
+59	Jas.
+59	Jm.
 60	1 Peter
 60	1 Pet.
 60	1 Pe.
@@ -419,9 +427,11 @@
 65	Jud.
 65	Jd.
 66	Revelation
-66	Rev
-66	Re
+66	Rev.
+66	Re.
 66	The Revelation
+66	Revelation to John
+66	Apocalypse of John
 70	Baruch
 70	Bar.
 71	Additions to Daniel
@@ -488,7 +498,7 @@
 79	Let. Jer.
 79	Ltr. Jer.
 79	LJe.
-79	EpJer
+79	EpJer.
 80	Judith
 80	Jth.
 80	Jdth.
