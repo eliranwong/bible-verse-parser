@@ -70,7 +70,7 @@
 83	III Maccabees
 84	4th Maccabees
 89	Wisd. of Sol.
-9	First Samuel
+09	First Samuel
 12	Second Kings
 13	1 Chronicles
 13	First Chron.
@@ -85,7 +85,7 @@
 76	First Esdras
 82	II Maccabees
 84	IV Maccabees
-5	Deuteronomy
+05	Deuteronomy
 10	Second Sam.
 11	First Kings
 12	Second Kgs.
@@ -103,8 +103,8 @@
 84	4 Maccabees
 85	Pr. of Man.
 90	Ps. Solomon
-9	1st Samuel
-9	First Sam.
+09	1st Samuel
+09	First Sam.
 10	2nd Samuel
 11	First Kgs.
 13	1st Chron.
@@ -126,7 +126,7 @@
 84	4Maccabees
 86	Add. Psalm
 92	Laodiceans
-3	Leviticus
+03	Leviticus
 11	1st Kings
 12	2nd Kings
 14	II Chron.
@@ -150,8 +150,8 @@
 79	Ltr. Jer.
 83	III Macc.
 92	Ep. Laod.
-9	1 Samuel
-9	1st Sam.
+09	1 Samuel
+09	1st Sam.
 10	2 Samuel
 10	2nd Sam.
 11	1st Kgs.
@@ -193,8 +193,8 @@
 86	Add. Ps.
 90	Ps. Sol.
 92	Ep. Lao.
-1	Genesis
-4	Numbers
+01	Genesis
+04	Numbers
 10	II Sam.
 11	1 Kings
 12	2 Kings
@@ -247,11 +247,11 @@
 85	Pr. Man
 87	Ecclus.
 90	PssSol.
-2	Exodus
-6	Joshua
-7	Judges
-9	1 Sam.
-9	I Sam.
+02	Exodus
+06	Joshua
+07	Judges
+09	1 Sam.
+09	I Sam.
 10	2 Sam.
 10	II Sa.
 11	1 Kgs.
@@ -322,15 +322,15 @@
 87	Sirach
 89	Wisdom
 90	PsSol.
-2	Exod.
-5	Deut.
-6	Josh.
-7	Jdgs.
-7	Judg.
-9	1 Sa.
-9	1 Sm.
-9	1Sam.
-9	I Sa.
+02	Exod.
+05	Deut.
+06	Josh.
+07	Jdgs.
+07	Judg.
+09	1 Sa.
+09	1 Sm.
+09	1Sam.
+09	I Sa.
 10	2 Sa.
 10	2 Sm.
 10	2Sam.
@@ -411,17 +411,17 @@
 84	4Mac.
 88	Tobit
 92	Laod.
-1	Gen.
-2	Exo.
-3	Lev.
-4	Num.
-6	Jos.
-6	Jsh.
-7	Jdg.
-8	Rth.
-8	Ruth
-9	1 S.
-9	1Sa.
+01	Gen.
+02	Exo.
+03	Lev.
+04	Num.
+06	Jos.
+06	Jsh.
+07	Jdg.
+08	Rth.
+08	Ruth
+09	1 S.
+09	1Sa.
 10	2 S.
 10	2Sa.
 11	1Ki.
@@ -526,19 +526,19 @@
 89	Wis.
 91	Ode.
 91	Odes
-1	Ge.
-1	Gn.
-2	Ex.
-3	Le.
-3	Lv.
-4	Nb.
-4	Nm.
-4	Nu.
-5	De.
-5	Dt.
-7	Jg.
-8	Ru.
-9	1S.
+01	Ge.
+01	Gn.
+02	Ex.
+03	Le.
+03	Lv.
+04	Nb.
+04	Nm.
+04	Nu.
+05	De.
+05	Dt.
+07	Jg.
+08	Ru.
+09	1S.
 10	2S.
 11	1K.
 12	2K.
