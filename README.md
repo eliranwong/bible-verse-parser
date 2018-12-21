@@ -9,7 +9,7 @@ A python parser to parse bible verse references from a text.
 5. Support standardisation of book abbreviations and verse reference format.
 
 # Main file: 
-bible-verse-parser.py
+<a href="https://github.com/eliranwong/bible-verse-parser/blob/master/bible-verse-parser.py">bible-verse-parser.py</a>
 
 # Usage:
 
