@@ -17,7 +17,7 @@ Command line: python bible-verse-parser.py
 Prompting question (1) "Enter filename here: "<br>
 Enter the filename of the file you want to parse.
 
-Prompting question (2) "Do you want to standardise all references [YES/NO]? "<br>
+Prompting question (2) "Do you want to standardise all verse references [YES/NO]? "<br>
 Enter YES if you want to standardise all verse references with SBL-style-abbreviations and common format like Gen 2:4; Deut 6:4, etc.<br>
 Any answers other than "YES" skip the standarisation.
 
@@ -29,7 +29,7 @@ Copy files "bible-verse-parser.py" and "dictionary-for-testing.txt" and put in t
 
 Enter command in terminal: python bible-verse-parser.py<br>
 "Enter filename here: " dictionary-for-testing.txt<br>
-"Do you want to standardise all references [YES/NO]? " YES<br>
+"Do you want to standardise all verse references [YES/NO]? " YES<br>
 You can locate the output file in the same folder named as "output_dictionary-for-testing.txt"<br>
 
 # Credits of file "dictionary-for-testing.txt"
