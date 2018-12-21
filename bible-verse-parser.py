@@ -8,15 +8,17 @@ f = open(inputFile,'r')
 newData = f.read()
 f.close()
 
-# functions
-def fixEmptyVerse(text):
-    # first fix books with chapter 1 ONLY
-    # oneChapterBook = [31,57,63,64,65,72,73,75,79,85]
-    fixedText = text
-    fixedText = re.sub('<ref onclick="bcv\((31|57|63|64|65|72|73|75|79|85),([0-9]+?),\)">', r'<ref onclick="bcv(\1,1,\2)">', fixedText)
-    fixedText = re.sub('<ref onclick="bcv\(([0-9]+?),([0-9]+?),\)">', r'<ref onclick="bcv(\1,\2,1)">＊', fixedText)
-    return fixedText
+# function for indicating working status
+def updateWorkingIndicator():
+    global workingIndicator
+    runningIndication = ["／", "－", "＼", "｜"]
+    print("... parsing ... "+runningIndication[workingIndicator])
+    if workingIndicator == 3:
+        workingIndicator = 0
+    else:
+        workingIndicator += 1
 
+# function for standardising verse references; use standard set of abbreviations defined below; format references as <abbreviation> <chapter>:<verse>
 def standardReference(text, answer):
     fixedText = text
     if answer == 'YES':
@@ -111,6 +113,7 @@ def standardReference(text, answer):
             "92": "EpLao",
         }
         for booknumber in standardAbbreviation:
+            updateWorkingIndicator()
             abbreviation = standardAbbreviation[booknumber]
             fixedText = re.sub('<ref onclick="bcv\('+booknumber+',([0-9]+?),([0-9]+?)\)">.*?</ref>', '<ref onclick="bcv('+booknumber+r',\1,\2)">'+abbreviation+r' \1:\2</ref>', fixedText)
         print("All verse references had been standardised.")
@@ -118,7 +121,12 @@ def standardReference(text, answer):
         print("Verse references are NOT standardised.")
     return fixedText
 
-# search for books; mark them with marvel.bible book numbers
+# start parsing from here
+
+# set a simple indicator
+workingIndicator = 0
+
+# search for books; mark them with book numbers, used by https://marvel.bible
 marvelBibleBookNo = {
     "The Song of the Three Holy Children": "72",
     "Song of the Three Holy Children": "72",
@@ -718,39 +726,55 @@ marvelBibleBookNo = {
     "Ws.": "89",
 }
 for book in marvelBibleBookNo:
+    updateWorkingIndicator()
+    # get the string of book name
     bookString = book
+    # make dot "." optional for an abbreviation
     bookString = re.sub('\.', r'[\.]*?', bookString, flags=re.M)
+    # make space " " optional in some cases
     bookString = re.sub('^([0-9]+?) ', r'\1[ ]*?', bookString, flags=re.M)
     bookString = re.sub('^([I]+?) ', r'\1[ ]*?', bookString, flags=re.M)
     bookString = re.sub('^(IV) ', r'\1[ ]*?', bookString, flags=re.M)
+    # get assigned book number from dictionary
     booknumber = marvelBibleBookNo[book]
+    # search & replace for marking book
     newData = re.sub('('+bookString+') ([0-9])', '『'+booknumber+r'｜\1』 \2', newData)
 
-# dealt with common patterns:
-# e.g. Book 1:1-2:1; 3:2-4, 5; Jude 1
+# add first set of taggings:
+updateWorkingIndicator()
 newData = re.sub('『([0-9]+?)｜([^\n『』]*?)』 ([0-9]+?):([0-9]+?)([^0-9])', r'<ref onclick="bcv(\1,\3,\4)">\2 \3:\4</ref>\5', newData)
+updateWorkingIndicator()
 newData = re.sub('『([0-9]+?)｜([^\n『』]*?)』 ([0-9]+?)([^0-9])', r'<ref onclick="bcv(\1,\3,)">\2 \3</ref>\4', newData)
-newData = fixEmptyVerse(newData)
 
-# check if verses following tagged references
+# fix references without verse numbers
+# fix books with chapter 1 ONLY; oneChapterBook = [31,57,63,64,65,72,73,75,79,85]
+updateWorkingIndicator()
+newData = re.sub('<ref onclick="bcv\((31|57|63|64|65|72|73|75|79|85),([0-9]+?),\)">', r'<ref onclick="bcv(\1,1,\2)">', newData)
+# fix references of chapters without verse number; assign verse number 1 in taggings
+updateWorkingIndicator()
+newData = re.sub('<ref onclick="bcv\(([0-9]+?),([0-9]+?),\)">', r'<ref onclick="bcv(\1,\2,1)">＊', newData)
+
+# check if verses following tagged references, e.g. Book 1:1-2:1; 3:2-4, 5; Jude 1
 p = re.compile('</ref>[,-;][ ]*?[0-9]', flags=re.M)
 s = p.search(newData)
 while s:
+    updateWorkingIndicator()
     newData = re.sub('<ref onclick="bcv\(([0-9]+?),([0-9]+?),([0-9]+?)\)">(.*?)</ref>([,-;][ ]*?)([0-9]+?):([0-9]+?)([^0-9])', r'<ref onclick="bcv(\1,\2,\3)">\4</ref>\5<ref onclick="bcv(\1,\6,\7)">\6:\7</ref>\8', newData)
     newData = re.sub('<ref onclick="bcv\(([0-9]+?),([0-9]+?),([0-9]+?)\)">([^＊].*?)</ref>([,-;][ ]*?)([0-9]+?)([^:0-9])', r'<ref onclick="bcv(\1,\2,\3)">\4</ref>\5<ref onclick="bcv(\1,\2,\6)">\6</ref>\7', newData)
     newData = re.sub('<ref onclick="bcv\(([0-9]+?),([0-9]+?),([0-9]+?)\)">(＊.*?)</ref>([,-;][ ]*?)([0-9]+?)([^:0-9])', r'<ref onclick="bcv(\1,\2,\3)">\4</ref>\5<ref onclick="bcv(\1,\6,1)">＊\6</ref>\7', newData)
     s = p.search(newData)
 
 # clear special markers
+updateWorkingIndicator()
 newData = re.sub('『[0-9]+?|([^\n『』]*?)』', r'\1', newData)
 newData = re.sub('(<ref onclick="bcv\([0-9]+?,[0-9]+?,[0-9]+?\)">)＊', r'\1', newData)
 
 # ask if standardising abbreviations and reference format
-newData = standardReference(newData, input("Do you want to standardise all references [YES/NO]? "))
+newData = standardReference(newData, input("Do you want to standardise all verse references [YES/NO]? "))
 
 # close file
 f = open(outputFile,'w')
 f.write(newData)
 f.close()
 
-print("All DONE! Verse references are tagged and saved in file '"+outputFile+"'")
+print("Parsing COMPLETED! Output file is saved as '"+outputFile+"'")
