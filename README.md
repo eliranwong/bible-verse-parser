@@ -23,7 +23,14 @@ Any answers other than "YES" skip the standarisation.
 
 # A practical example:
 
+Copy files "bible-verse-parser.py" and "dictionary-for-testing.txt" and put in the same folder
+(Remarks: "dictionary-for-testing.txt" is Mounce Concise Greek-English Dictionary in plain text format)
+(bible-verse-parser.py is used here to add taggings for bible verse references.)
 
+Enter command in terminal: python bible-verse-parser.py
+"Enter filename here: " dictionary-for-testing.txt
+"Do you want to standardise all references [YES/NO]? " YES
+You can locate the output file in the same folder named as "output_dictionary-for-testing.txt"
 
 # Credits of file "dictionary-for-testing.txt"
 
