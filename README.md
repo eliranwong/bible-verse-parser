@@ -30,7 +30,7 @@ Copy files "bible-verse-parser.py" and "dictionary-for-testing.txt" and put in t
 Enter command in terminal: python bible-verse-parser.py<br>
 "Enter filename here: " dictionary-for-testing.txt<br>
 "Do you want to standardise all verse references [YES/NO]? " YES<br>
-You can locate the output file in the same folder named as "output_dictionary-for-testing.txt"<br>
+You can find the newly output file in the same folder named as "output_dictionary-for-testing.txt"<br>
 
 # Credits of file "dictionary-for-testing.txt"
 
