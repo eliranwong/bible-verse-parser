@@ -26,6 +26,7 @@ def updateWorkingIndicator():
 def standardReference(text, answer):
     fixedText = text
     if answer == 'YES':
+        updateWorkingIndicator()
         standardAbbreviation = {
             "1": "Gen",
             "2": "Exod",
