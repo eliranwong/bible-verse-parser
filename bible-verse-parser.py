@@ -907,13 +907,15 @@ updateWorkingIndicator()
 newData = re.sub('<ref onclick="bcv\(([0-9]+?),([0-9]+?),\)">', r'<ref onclick="bcv(\1,\2,1)">＊', newData)
 
 # check if verses following tagged references, e.g. Book 1:1-2:1; 3:2-4, 5; Jude 1
-p = re.compile('</ref>[,-;][ ]*?[0-9]', flags=re.M)
+p = re.compile('</ref>[,-–;][ ]*?[0-9]', flags=re.M)
 s = p.search(newData)
 while s:
     updateWorkingIndicator()
-    newData = re.sub('<ref onclick="bcv\(([0-9]+?),([0-9]+?),([0-9]+?)\)">(.*?)</ref>([,-;][ ]*?)([0-9]+?):([0-9]+?)([^0-9])', r'<ref onclick="bcv(\1,\2,\3)">\4</ref>\5<ref onclick="bcv(\1,\6,\7)">\6:\7</ref>\8', newData)
-    newData = re.sub('<ref onclick="bcv\(([0-9]+?),([0-9]+?),([0-9]+?)\)">([^＊].*?)</ref>([,-;][ ]*?)([0-9]+?)([^:0-9])', r'<ref onclick="bcv(\1,\2,\3)">\4</ref>\5<ref onclick="bcv(\1,\2,\6)">\6</ref>\7', newData)
-    newData = re.sub('<ref onclick="bcv\(([0-9]+?),([0-9]+?),([0-9]+?)\)">(＊.*?)</ref>([,-;][ ]*?)([0-9]+?)([^:0-9])', r'<ref onclick="bcv(\1,\2,\3)">\4</ref>\5<ref onclick="bcv(\1,\6,1)">＊\6</ref>\7', newData)
+    newData = re.sub('<ref onclick="bcv\(([0-9]+?),([0-9]+?),([0-9]+?)\)">(.*?)</ref>([,-–;][ ]*?)([0-9]+?):([0-9]+?)([^0-9])', r'<ref onclick="bcv(\1,\2,\3)">\4</ref>\5<ref onclick="bcv(\1,\6,\7)">\6:\7</ref>\8', newData)
+    newData = re.sub('<ref onclick="bcv\(([0-9]+?),([0-9]+?),([0-9]+?)\)">([^＊].*?)</ref>([,-–;][ ]*?)([0-9]+?)([^:0-9])', r'<ref onclick="bcv(\1,\2,\3)">\4</ref>\5<ref onclick="bcv(\1,\2,\6)">\6</ref>\7', newData)
+    newData = re.sub('<ref onclick="bcv\(([0-9]+?),([0-9]+?),([0-9]+?)\)">([^＊].*?)</ref>([,-–;][ ]*?)([0-9]+?):([^0-9])', r'<ref onclick="bcv(\1,\2,\3)">\4</ref>\5<ref onclick="bcv(\1,\2,\6)">\6</ref>:\7', newData)
+    newData = re.sub('<ref onclick="bcv\(([0-9]+?),([0-9]+?),([0-9]+?)\)">(＊.*?)</ref>([,-–;][ ]*?)([0-9]+?)([^:0-9])', r'<ref onclick="bcv(\1,\2,\3)">\4</ref>\5<ref onclick="bcv(\1,\6,1)">＊\6</ref>\7', newData)
+    newData = re.sub('<ref onclick="bcv\(([0-9]+?),([0-9]+?),([0-9]+?)\)">(＊.*?)</ref>([,-–;][ ]*?)([0-9]+?):([^0-9])', r'<ref onclick="bcv(\1,\2,\3)">\4</ref>\5<ref onclick="bcv(\1,\6,1)">＊\6</ref>:\7', newData)
     s = p.search(newData)
 
 # clear special markers
