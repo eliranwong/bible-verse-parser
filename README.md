@@ -24,8 +24,12 @@ Any answers other than "YES" skip the standarisation.
 # A practical example:
 
 
-# Credits of the dictionary-for-testing.txt
 
+# Credits of file "dictionary-for-testing.txt"
+
+Source: <a href="https://github.com/billmounce/dictionary/blob/master/dictionary.txt">https://github.com/billmounce/dictionary/blob/master/dictionary.txt</a>
+
+Attribution:
 Mounce Concise Greek-English Dictionary
 Copyright 1993 All Rights Reserved
 www.teknia.com/greek-dictionary
