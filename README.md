@@ -1,7 +1,7 @@
 # bible-verse-parser
 A python parser to parse bible verse references from a text.
 
-This was originally created to tag resources for building <a href="https://marvel.bible">https://marvel.bible</a>
+This was originally created to tag resources for building <a href="https://marvel.bible">https://marvel.bible</a>.<br>
 The script is now modified for general use.
 
 # Feature:
