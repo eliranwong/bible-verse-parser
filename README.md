@@ -5,11 +5,13 @@ This was originally created to tag resources for building <a href="https://marve
 The script is now modified for general use.
 
 # Feature:
-1. Search for verse references from a text and add taggings programatically
-2. Support books of canon and apocrypha
-3. Support taggings of chains of refernces, e.g. Rom 1:2, 3, 5, 8; 9:2, 10
-4. Support books of one chapter only, like Obadiah, Philemon, 2John, 3John, Jude, etc.
-5. Support standardisation of book abbreviations and verse reference format.
+1. Search for verse references from text file(s)
+2. add taggings verse reference
+3. Support books of canon and apocrypha
+4. Support taggings of chains of refernces, e.g. Rom 1:2, 3, 5, 8; 9:2, 10
+5. Support books of one chapter only, like Obadiah, Philemon, 2John, 3John, Jude, etc.
+6. Support chapter references, e.g. Gen 1, 3-4; 8, 9-10.
+7. Support standardisation of book abbreviations and verse reference format.
 
 # Main file: 
 <a href="https://github.com/eliranwong/bible-verse-parser/blob/master/bible-verse-parser.py">bible-verse-parser.py</a>
