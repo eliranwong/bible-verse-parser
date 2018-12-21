@@ -24,7 +24,7 @@ Any answers other than "YES" skip the standarisation.
 # A practical example:
 
 Copy files "bible-verse-parser.py" and "dictionary-for-testing.txt" and put in the same folder<br>
-(Remarks: "dictionary-for-testing.txt" is Mounce Concise Greek-English Dictionary in plain text format)<br>
+(Remarks: "dictionary-for-testing.txt" is the Mounce Concise Greek-English Dictionary in plain text format)<br>
 (bible-verse-parser.py is used here to add taggings for bible verse references.)<br>
 
 Enter command in terminal: python bible-verse-parser.py<br>
