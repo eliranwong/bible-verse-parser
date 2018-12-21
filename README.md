@@ -14,29 +14,29 @@ A python parser to parse bible verse references from a text.
 
 Command line: python bible-verse-parser.py
 
-Prompting question (1) "Enter filename here: "
+Prompting question (1) "Enter filename here: "<br>
 Enter the filename of the file you want to parse.
 
-Prompting question (2) "Do you want to standardise all references [YES/NO]? "
-Enter YES if you want to standardise all verse references with SBL-style-abbreviations and common format like Gen 2:4; Deut 6:4, etc.
+Prompting question (2) "Do you want to standardise all references [YES/NO]? "<br>
+Enter YES if you want to standardise all verse references with SBL-style-abbreviations and common format like Gen 2:4; Deut 6:4, etc.<br>
 Any answers other than "YES" skip the standarisation.
 
 # A practical example:
 
-Copy files "bible-verse-parser.py" and "dictionary-for-testing.txt" and put in the same folder
-(Remarks: "dictionary-for-testing.txt" is Mounce Concise Greek-English Dictionary in plain text format)
-(bible-verse-parser.py is used here to add taggings for bible verse references.)
+Copy files "bible-verse-parser.py" and "dictionary-for-testing.txt" and put in the same folder<br>
+(Remarks: "dictionary-for-testing.txt" is Mounce Concise Greek-English Dictionary in plain text format)<br>
+(bible-verse-parser.py is used here to add taggings for bible verse references.)<br>
 
-Enter command in terminal: python bible-verse-parser.py
-"Enter filename here: " dictionary-for-testing.txt
-"Do you want to standardise all references [YES/NO]? " YES
-You can locate the output file in the same folder named as "output_dictionary-for-testing.txt"
+Enter command in terminal: python bible-verse-parser.py<br>
+"Enter filename here: " dictionary-for-testing.txt<br>
+"Do you want to standardise all references [YES/NO]? " YES<br>
+You can locate the output file in the same folder named as "output_dictionary-for-testing.txt"<br>
 
 # Credits of file "dictionary-for-testing.txt"
 
 Source: <a href="https://github.com/billmounce/dictionary/blob/master/dictionary.txt">https://github.com/billmounce/dictionary/blob/master/dictionary.txt</a>
 
-Attribution:
-Mounce Concise Greek-English Dictionary
-Copyright 1993 All Rights Reserved
+Attribution:<br>
+Mounce Concise Greek-English Dictionary<br>
+Copyright 1993 All Rights Reserved<br>
 www.teknia.com/greek-dictionary
