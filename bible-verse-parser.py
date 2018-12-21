@@ -132,7 +132,6 @@ workingIndicator = 0
 
 # search for books; mark them with book numbers, used by https://marvel.bible
 marvelBibleBookNo = {
-    "book": "number",
     "Ge.": "1",
     "Gen.": "1",
     "GEN.": "1",
