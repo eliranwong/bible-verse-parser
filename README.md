@@ -8,7 +8,8 @@ A python parser to parse bible verse references from a text.
 4. Support books of one chapter only, like Obadiah, Philemon, 2John, 3John, Jude, etc.
 5. Support standardisation of book abbreviations and verse reference format.
 
-# Main file: bible-verse-parser.py
+# Main file: 
+bible-verse-parser.py
 
 # Usage:
 
