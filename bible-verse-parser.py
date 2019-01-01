@@ -927,7 +927,7 @@ inputFile = input('Enter filename here: ')
 outputFile = 'output_' + inputFile
 
 # ask if standardising abbreviations and reference format
-standardisation = input("Do you want to standardise the format of all bible verse references? [YES/NO]")
+standardisation = input("Do you want to standardise the format of all bible verse references? [YES/NO] ")
 
 # open file and read source text
 try:
