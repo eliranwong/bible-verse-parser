@@ -15,7 +15,7 @@ The script is now modified for general use.
 8. Support parsing multiple files in one go.
 
 # Main file: 
-<a href="https://github.com/eliranwong/bible-verse-parser/blob/master/bible-verse-parser.py">bible-verse-parser.py</a>
+<a href="https://github.com/eliranwong/bible-verse-parser/blob/master/bible-verse-parser.py">bible-verse-parser.py</a> [written with python version 3.6.5]
 
 # Usage:
 Command line: python bible-verse-parser.py
