@@ -18,9 +18,9 @@ The script is now modified for general use.
 <a href="https://github.com/eliranwong/bible-verse-parser/blob/master/bible-verse-parser.py">bible-verse-parser.py</a>
 
 # Usage:
-
 Command line: python bible-verse-parser.py
 
+# User Interaction:
 Prompting question (1) "Enter a file / folder name here: "<br>
 Enter the name of a file, which you want to parse.
 OR
