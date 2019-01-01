@@ -28,7 +28,12 @@ Enter YES if you want to standardise all verse references with SBL-style-abbrevi
 Any answers other than "YES" [case-insensitive] skip the standarisation.
 """
 
+# import modules, which are ESSENTIAL for running BibleVerseParser
 import re, glob, os
+
+"""
+START - class BibleVerseParser
+"""
 
 class BibleVerseParser:
 
@@ -980,14 +985,21 @@ class BibleVerseParser:
         f.close()
         print("Output file is saved as \""+outputFile+"\"")
 
-# end of lines of class BibleVerseParse
+    def parseFilesInFolder(self, folder):
+        # create an output directory
+        outputFolder = "output_"+folder
+        if not os.path.isdir(outputFolder):
+            os.mkdir(outputFolder)
+        # loop through the directory, running parsing on file(s) only
+        fileList = glob.glob(folder+"/*")
+        for file in fileList:
+            if os.path.isfile(file):
+                self.parseFile(file)
+        print("All output files are saved in folder", "\""+outputFolder+"\"")
 
-#
-#
-#
-#
-#
-
+"""
+END - class BibleVerseParser
+"""
 
 # Interaction with user
 
@@ -996,6 +1008,7 @@ inputName = input("Enter a file / folder name here: ")
 # ask if standardising abbreviations and reference format
 standardisation = input("Do you want to standardise the format of all bible verse references? [YES/NO] ")
 
+# parsing file(s)
 if os.path.isfile(inputName):
     # create an instance of BibleVerseParser
     parser = BibleVerseParser(standardisation)
@@ -1006,21 +1019,9 @@ if os.path.isfile(inputName):
 elif os.path.isdir(inputName):
     # create an instance of BibleVerseParser
     parser = BibleVerseParser(standardisation)
-    # create an output directory
-    outputFolder = "output_"+inputName
-    if not os.path.isdir(outputFolder):
-        os.mkdir(outputFolder)
-    # loop through the directory, running parsing on file(s) only
-    fileList = glob.glob(inputName+"/*")
-    for file in fileList:
-        if os.path.isfile(file):
-            parser.parseFile(file)
+    # parse file(s) in a directory
+    parser.parseFilesInFolder(inputName)
     # delete object
     del parser
-    print("All output files are saved in folder", "\""+outputFolder+"\"")
 else:
     print("\""+inputName+"\"", "is not found!")
-
-
-
-
