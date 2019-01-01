@@ -1,9 +1,44 @@
+"""
+A python parser to parse bible verse references from a text.
+
+This was originally created to tag resources for building <a href="https://marvel.bible">https://marvel.bible</a>.<br>
+The script is now modified for general use.
+
+Features:
+1. Search for verse references from text file(s)
+2. Add taggings on verse references
+3. Support books of bible canon and apocrypha
+4. Support tagging on chains of refernces, e.g. Rom 1:2, 3, 5, 8; 9:2, 10
+5. Support books of one chapter only, like Obadiah 2, Jude 3, 3John 4, etc.
+6. Support chapter references [references without verse number specified], e.g. Gen 1, 3-4; 8, 9-10.
+7. Support standardisation of book abbreviations and verse reference format.
+8. Support parsing multiple files in one go.
+
+Usage:
+Command line: python bible-verse-parser.py
+
+User Interaction:
+Prompting question (1) "Enter a file / folder name here: "<br>
+Enter the name of a file, which you want to parse.
+OR
+Enter the name of a directory containing files, which you want you parse.
+
+Prompting question (2) "Do you want to standardise the format of all bible verse references? [YES/NO] "<br>
+Enter YES if you want to standardise all verse references with SBL-style-abbreviations and common format like Gen 2:4; Deut 6:4, etc.<br>
+Any answers other than "YES" [case-insensitive] skip the standarisation.
+"""
+
+import re, glob, os
+
 class BibleVerseParser:
+
+    # variable to capture user preference on standardisation
+    standardisation = ""
 
     # set a simple indicator
     workingIndicator = 0
 
-    # mapping book abbreviation / name to book number
+    # mapping bible book abbreviation / bible book name to book number
     marvelBibleBookNo = {
         "Ge.": "1",
         "Gen.": "1",
@@ -739,7 +774,10 @@ class BibleVerseParser:
     }
 
     # initialisation
-    def __init__(self):
+    def __init__(self, standardisation):
+        # set preference of standardisation
+        self.standardisation = standardisation
+
         # sort dictionary by alphabet of keys
         marvelBibleBookNoTemp = {}
         for book in sorted(self.marvelBibleBookNo.keys()) :
@@ -760,108 +798,105 @@ class BibleVerseParser:
             self.workingIndicator += 1
     
     # function for standardising verse references; use standard set of abbreviations defined below; format references as <abbreviation> <chapter>:<verse>
-    def standardReference(self, text, answer):
+    def standardReference(self, text):
         standardisedText = text
-        # standardisation is running only if user's answer is 'YES' [case-insensitive]
-        if answer.lower() == 'yes':
+
+        self.updateWorkingIndicator()
+
+        standardAbbreviation = {
+            "1": "Gen",
+            "2": "Exod",
+            "3": "Lev",
+            "4": "Num",
+            "5": "Deut",
+            "6": "Josh",
+            "7": "Judg",
+            "8": "Ruth",
+            "9": "1Sam",
+            "10": "2Sam",
+            "11": "1Kgs",
+            "12": "2Kgs",
+            "13": "1Chr",
+            "14": "2Chr",
+            "15": "Ezra",
+            "16": "Neh",
+            "17": "Esth",
+            "18": "Job",
+            "19": "Ps",
+            "20": "Prov",
+            "21": "Eccl",
+            "22": "Song",
+            "23": "Isa",
+            "24": "Jer",
+            "25": "Lam",
+            "26": "Ezek",
+            "27": "Dan",
+            "28": "Hos",
+            "29": "Joel",
+            "30": "Amos",
+            "31": "Obad",
+            "32": "Jonah",
+            "33": "Mic",
+            "34": "Nah",
+            "35": "Hab",
+            "36": "Zeph",
+            "37": "Hag",
+            "38": "Zech",
+            "39": "Mal",
+            "40": "Matt",
+            "41": "Mark",
+            "42": "Luke",
+            "43": "John",
+            "44": "Acts",
+            "45": "Rom",
+            "46": "1Cor",
+            "47": "2Cor",
+            "48": "Gal",
+            "49": "Eph",
+            "50": "Phil",
+            "51": "Col",
+            "52": "1Thess",
+            "53": "2Thess",
+            "54": "1Tim",
+            "55": "2Tim",
+            "56": "Titus",
+            "57": "Phlm",
+            "58": "Heb",
+            "59": "Jas",
+            "60": "1Pet",
+            "61": "2Pet",
+            "62": "1John",
+            "63": "2John",
+            "64": "3John",
+            "65": "Jude",
+            "66": "Rev",
+            "70": "Bar",
+            "71": "AddDan",
+            "72": "PrAzar",
+            "73": "Bel",
+            "75": "Sus",
+            "76": "1Esd",
+            "77": "2Esd",
+            "78": "AddEsth",
+            "79": "EpJer",
+            "80": "Jdt",
+            "81": "1Macc",
+            "82": "2Macc",
+            "83": "3Macc",
+            "84": "4Macc",
+            "85": "PrMan",
+            "86": "Ps151",
+            "87": "Sir",
+            "88": "Tob",
+            "89": "Wis",
+            "90": "PssSol",
+            "91": "Odes",
+            "92": "EpLao",
+        }
+        for booknumber in standardAbbreviation:
             self.updateWorkingIndicator()
-            standardAbbreviation = {
-                "1": "Gen",
-                "2": "Exod",
-                "3": "Lev",
-                "4": "Num",
-                "5": "Deut",
-                "6": "Josh",
-                "7": "Judg",
-                "8": "Ruth",
-                "9": "1Sam",
-                "10": "2Sam",
-                "11": "1Kgs",
-                "12": "2Kgs",
-                "13": "1Chr",
-                "14": "2Chr",
-                "15": "Ezra",
-                "16": "Neh",
-                "17": "Esth",
-                "18": "Job",
-                "19": "Ps",
-                "20": "Prov",
-                "21": "Eccl",
-                "22": "Song",
-                "23": "Isa",
-                "24": "Jer",
-                "25": "Lam",
-                "26": "Ezek",
-                "27": "Dan",
-                "28": "Hos",
-                "29": "Joel",
-                "30": "Amos",
-                "31": "Obad",
-                "32": "Jonah",
-                "33": "Mic",
-                "34": "Nah",
-                "35": "Hab",
-                "36": "Zeph",
-                "37": "Hag",
-                "38": "Zech",
-                "39": "Mal",
-                "40": "Matt",
-                "41": "Mark",
-                "42": "Luke",
-                "43": "John",
-                "44": "Acts",
-                "45": "Rom",
-                "46": "1Cor",
-                "47": "2Cor",
-                "48": "Gal",
-                "49": "Eph",
-                "50": "Phil",
-                "51": "Col",
-                "52": "1Thess",
-                "53": "2Thess",
-                "54": "1Tim",
-                "55": "2Tim",
-                "56": "Titus",
-                "57": "Phlm",
-                "58": "Heb",
-                "59": "Jas",
-                "60": "1Pet",
-                "61": "2Pet",
-                "62": "1John",
-                "63": "2John",
-                "64": "3John",
-                "65": "Jude",
-                "66": "Rev",
-                "70": "Bar",
-                "71": "AddDan",
-                "72": "PrAzar",
-                "73": "Bel",
-                "75": "Sus",
-                "76": "1Esd",
-                "77": "2Esd",
-                "78": "AddEsth",
-                "79": "EpJer",
-                "80": "Jdt",
-                "81": "1Macc",
-                "82": "2Macc",
-                "83": "3Macc",
-                "84": "4Macc",
-                "85": "PrMan",
-                "86": "Ps151",
-                "87": "Sir",
-                "88": "Tob",
-                "89": "Wis",
-                "90": "PssSol",
-                "91": "Odes",
-                "92": "EpLao",
-            }
-            for booknumber in standardAbbreviation:
-                self.updateWorkingIndicator()
-                abbreviation = standardAbbreviation[booknumber]
-                standardisedText = re.sub('<ref onclick="bcv\('+booknumber+',([0-9]+?),([0-9]+?)\)">.*?</ref>', '<ref onclick="bcv('+booknumber+r',\1,\2)">'+abbreviation+r' \1:\2</ref>', standardisedText)
-            print("The format of all bible verse references had been standardised.")
-        else:
-            print("The format of bible verse references is NOT standardised.")
+            abbreviation = standardAbbreviation[booknumber]
+            standardisedText = re.sub('<ref onclick="bcv\('+booknumber+',([0-9]+?),([0-9]+?)\)">.*?</ref>', '<ref onclick="bcv('+booknumber+r',\1,\2)">'+abbreviation+r' \1:\2</ref>', standardisedText)
         return standardisedText
 
     def parseText(self, text):
@@ -914,41 +949,78 @@ class BibleVerseParser:
         taggedText = re.sub('(<ref onclick="bcv\([0-9]+?,[0-9]+?,[0-9]+?\)">)＊', r'\1', taggedText)
         return taggedText
 
+    def parseFile(self, inputFile):
+        # set output filename here
+        outputFile = 'output_' + inputFile
+        
+        # open file and read input text
+        try:
+            f = open(inputFile,'r')
+        except:
+            print("File note found! Please make sure if you enter filename correctly and try again.")
+            exit()
+        newData = f.read()
+        f.close()
+        
+        # parse the opened text
+        newData = self.parseText(newData)
+        print("Finished parsing file", "\""+inputFile+"\".")
+        
+        # standardise the format of bible verse references
+        # standardisation is running only if user's answer is 'YES' [case-insensitive]
+        if self.standardisation.lower() == 'yes':
+            newData = self.standardReference(newData)
+            print("Verse reference format in file", "\""+inputFile+"\"", "had been standardised.")
+        else:
+            print("Verse reference format used in file", "\""+inputFile+"\"", "is kept.")
+
+        # save output text in a separate file
+        f = open(outputFile,'w')
+        f.write(newData)
+        f.close()
+        print("Output file is saved as \""+outputFile+"\"")
+
+# end of lines of class BibleVerseParse
+
 #
 #
 #
 #
 #
 
-import re
 
-# ask for filename
-inputFile = input('Enter filename here: ')
-outputFile = 'output_' + inputFile
+# Interaction with user
 
+# ask for filename or folder name
+inputName = input("Enter a file / folder name here: ")
 # ask if standardising abbreviations and reference format
 standardisation = input("Do you want to standardise the format of all bible verse references? [YES/NO] ")
 
-# open file and read source text
-try:
-    f = open(inputFile,'r')
-except:
-    print("File note found! Please make sure if you enter filename correctly and try again.")
-    exit()
-newData = f.read()
-f.close()
+if os.path.isfile(inputName):
+    # create an instance of BibleVerseParser
+    parser = BibleVerseParser(standardisation)
+    # parse file
+    parser.parseFile(inputName)
+    # delete object
+    del parser
+elif os.path.isdir(inputName):
+    # create an instance of BibleVerseParser
+    parser = BibleVerseParser(standardisation)
+    # create an output directory
+    outputFolder = "output_"+inputName
+    if not os.path.isdir(outputFolder):
+        os.mkdir(outputFolder)
+    # loop through the directory, running parsing on file(s) only
+    fileList = glob.glob(inputName+"/*")
+    for file in fileList:
+        if os.path.isfile(file):
+            parser.parseFile(file)
+    # delete object
+    del parser
+    print("All output files are saved in folder", "\""+outputFolder+"\"")
+else:
+    print("\""+inputName+"\"", "is not found!")
 
 
-# start parsing from here
-parser = BibleVerseParser()
-newData = parser.parseText(newData)
 
-# standardise the format of all bible verse references; depends on user's earlier response
-newData = parser.standardReference(newData, standardisation)
 
-# close file
-f = open(outputFile,'w')
-f.write(newData)
-f.close()
-
-print("Parsing COMPLETED! Output file is saved as '"+outputFile+"'")
