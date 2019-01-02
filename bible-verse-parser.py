@@ -997,31 +997,32 @@ class BibleVerseParser:
                 self.parseFile(file)
         print("All output files are saved in folder", "\""+outputFolder+"\"")
 
+    def startParsing(self, inputName):
+        # check if user's input is a file or a folder
+        if os.path.isfile(inputName):
+            # parse file
+            self.parseFile(inputName)
+        elif os.path.isdir(inputName):
+            # parse file(s) in a directory
+            self.parseFilesInFolder(inputName)
+        else:
+            # input name is neither a file or a folder
+            print("\""+inputName+"\"", "is not found!")
+
 """
 END - class BibleVerseParser
 """
 
-# Interaction with user
+if __name__ == '__main__':
+    # Interaction with user
+    # ask for filename or folder name
+    inputName = input("Enter a file / folder name here: ")
+    # ask if standardising abbreviations and reference format
+    standardisation = input("Do you want to standardise the format of all bible verse references? [YES/NO] ")
 
-# ask for filename or folder name
-inputName = input("Enter a file / folder name here: ")
-# ask if standardising abbreviations and reference format
-standardisation = input("Do you want to standardise the format of all bible verse references? [YES/NO] ")
-
-# parsing file(s)
-if os.path.isfile(inputName):
     # create an instance of BibleVerseParser
     parser = BibleVerseParser(standardisation)
-    # parse file
-    parser.parseFile(inputName)
+    # start parsing
+    parser.startParsing(inputName)
     # delete object
     del parser
-elif os.path.isdir(inputName):
-    # create an instance of BibleVerseParser
-    parser = BibleVerseParser(standardisation)
-    # parse file(s) in a directory
-    parser.parseFilesInFolder(inputName)
-    # delete object
-    del parser
-else:
-    print("\""+inputName+"\"", "is not found!")
