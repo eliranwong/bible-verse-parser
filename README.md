@@ -18,7 +18,7 @@ This script is now adapted to become a core utility in <a href="https://github.c
 9. Support extract all references in a text.  This feature is especially useful for bulding indexes.
 
 # Main file: 
-<a href="https://github.com/eliranwong/bible-verse-parser/blob/master/bible-verse-parser.py">bible-verse-parser.py</a> [written with python version 3.6.5]
+<a href="https://github.com/eliranwong/bible-verse-parser/blob/master/BibleVerseParser.py">bible-verse-parser.py</a> [written with python version 3.6.5]
 
 # Usage:
 Command line: python bible-verse-parser.py
