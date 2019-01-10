@@ -4,6 +4,8 @@ A python parser to parse bible verse references from a text.
 This was originally created to tag resources for building <a href="https://marvel.bible">https://marvel.bible</a>.<br>
 The script is now modified for general use.
 
+This script is now adapted to become a core utility in <a href="https://github.com/eliranwong/UniqueBible" target="_blank">UniqueBible.app project</a>.
+
 # Features:
 1. Search for verse references from text file(s)
 2. Add taggings on verse references
@@ -13,6 +15,7 @@ The script is now modified for general use.
 6. Support chapter references [references without verse number specified], e.g. Gen 1, 3-4; 8, 9-10.
 7. Support standardisation of book abbreviations and verse reference format.
 8. Support parsing multiple files in one go.
+9. Support extract all references in a text.  This feature is especially useful for bulding indexes.
 
 # Main file: 
 <a href="https://github.com/eliranwong/bible-verse-parser/blob/master/bible-verse-parser.py">bible-verse-parser.py</a> [written with python version 3.6.5]
