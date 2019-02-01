@@ -15,7 +15,7 @@ This script is now adapted to become a core utility in <a href="https://github.c
 6. Support chapter references [references without verse number specified], e.g. Gen 1, 3-4; 8, 9-10.
 7. Support standardisation of book abbreviations and verse reference format.
 8. Support parsing multiple files in one go.
-9. Support extract all references in a text.  This feature is especially useful for bulding indexes.
+9. Support extracting all references in a text.  (This feature is especially useful for bulding indexes.)
 
 # Main file: 
 <a href="https://github.com/eliranwong/bible-verse-parser/blob/master/BibleVerseParser.py">bible-verse-parser.py</a> [written with python version 3.6.5]
