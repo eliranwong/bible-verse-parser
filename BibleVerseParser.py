@@ -1,11 +1,11 @@
 """
-Previously uploaded at https://github.com/eliranwong/bible-verse-parser
-Modified for integration into UniqueBible.app
+A python utility to parse bible verse references.
+It is both useful for tagging and extracting bible verse references from a text.
 
-A python parser to parse bible verse references from a text.
+This was originally created to format resources <a href="https://marvel.bible">https://marvel.bible</a>.
+(The original version is available at https://github.com/eliranwong/bible-verse-parser)
 
-This was originally created to tag resources for building <a href="https://marvel.bible">https://marvel.bible</a>.<br>
-The script is now modified for general use.
+This is now integrated into UniqueBible.app as a core utility.
 
 Features:
 1. Search for verse references from text file(s)
@@ -16,9 +16,10 @@ Features:
 6. Support chapter references [references without verse number specified], e.g. Gen 1, 3-4; 8, 9-10.
 7. Support standardisation of book abbreviations and verse reference format.
 8. Support parsing multiple files in one go.
+9. Support extracting all references in a text.
 
-Usage:
-Command line: python bible-verse-parser.py
+Usage [standalone]:
+Command line: python BibleVerseParser.py
 
 User Interaction:
 Prompting question (1) "Enter a file / folder name here: "<br>
@@ -40,12 +41,6 @@ START - class BibleVerseParser
 """
 
 class BibleVerseParser:
-
-    # variable to capture user preference on standardisation
-    standardisation = ""
-
-    # set a simple indicator
-    workingIndicator = 0
 
     # SBL-style abbreviations
     standardAbbreviation = {
@@ -878,16 +873,8 @@ class BibleVerseParser:
     def __init__(self, standardisation):
         # set preference of standardisation
         self.standardisation = standardisation
-
-        # sort dictionary by alphabet of keys
-        marvelBibleBookNoTemp = {}
-        for book in sorted(self.marvelBibleBookNo.keys()) :
-            marvelBibleBookNoTemp[book] = self.marvelBibleBookNo[book]
-
-        # sort dictionary by length of keys
-        self.marvelBibleBookNo = {}
-        for book in sorted(marvelBibleBookNoTemp, key=len, reverse=True):
-            self.marvelBibleBookNo[book] = marvelBibleBookNoTemp[book]
+        # setup a simple indicator for telling progress
+        self.workingIndicator = 0
 
     # function for indicating working status
     def updateWorkingIndicator(self):
@@ -909,10 +896,10 @@ class BibleVerseParser:
     def standardReference(self, text):
         standardisedText = text
 
-        #self.updateWorkingIndicator()
+        self.updateWorkingIndicator()
 
         for booknumber in self.standardAbbreviation:
-            #self.updateWorkingIndicator()
+            self.updateWorkingIndicator()
             abbreviation = self.standardAbbreviation[booknumber]
             standardisedText = re.sub('<ref onclick="bcv\('+booknumber+',([0-9]+?),([0-9]+?)\)">.*?</ref>', '<ref onclick="bcv('+booknumber+r',\1,\2)">'+abbreviation+r' \1:\2</ref>', standardisedText)
         return standardisedText
@@ -928,8 +915,11 @@ class BibleVerseParser:
             taggedText = re.sub('<ref onclick="bcv\([0-9]+?,[0-9]+?,[0-9]+?\)">(.*?)</ref>', r'\1', taggedText, flags=re.M)
 
         # search for books; mark them with book numbers, used by https://marvel.bible
-        for book in self.marvelBibleBookNo:
-            #self.updateWorkingIndicator()
+        # sorting books by alphabet, then by length
+        sortedBooks = sorted(self.marvelBibleBookNo.keys())
+        sortedBooks = sorted(sortedBooks, key=len, reverse=True)
+        for book in sortedBooks:
+            self.updateWorkingIndicator()
             # get the string of book name
             bookString = book
             # make dot "." optional for an abbreviation
@@ -944,24 +934,24 @@ class BibleVerseParser:
             taggedText = re.sub('('+bookString+') ([0-9])', '『'+booknumber+r'｜\1』 \2', taggedText)
         
         # add first set of taggings:
-        #self.updateWorkingIndicator()
+        self.updateWorkingIndicator()
         taggedText = re.sub('『([0-9]+?)｜([^\n『』]*?)』 ([0-9]+?):([0-9]+?)([^0-9])', r'<ref onclick="bcv(\1,\3,\4)">\2 \3:\4</ref｝\5', taggedText)
-        #self.updateWorkingIndicator()
+        self.updateWorkingIndicator()
         taggedText = re.sub('『([0-9]+?)｜([^\n『』]*?)』 ([0-9]+?)([^0-9])', r'<ref onclick="bcv(\1,\3,)">\2 \3</ref｝\4', taggedText)
         
         # fix references without verse numbers
         # fix books with chapter 1 ONLY; oneChapterBook = [31,57,63,64,65,72,73,75,79,85]
-        #self.updateWorkingIndicator()
+        self.updateWorkingIndicator()
         taggedText = re.sub('<ref onclick="bcv\((31|57|63|64|65|72|73|75|79|85),([0-9]+?),\)">', r'<ref onclick="bcv(\1,1,\2)">', taggedText)
         # fix references of chapters without verse number; assign verse number 1 in taggings
-        #self.updateWorkingIndicator()
+        self.updateWorkingIndicator()
         taggedText = re.sub('<ref onclick="bcv\(([0-9]+?),([0-9]+?),\)">', r'<ref onclick="bcv(\1,\2,1)">＊', taggedText)
         
         # check if verses following tagged references, e.g. Book 1:1-2:1; 3:2-4, 5; Jude 1
         p = re.compile('</ref｝[,-–;][ ]*?[0-9]', flags=re.M)
         s = p.search(taggedText)
         while s:
-            #self.updateWorkingIndicator()
+            self.updateWorkingIndicator()
             taggedText = re.sub('<ref onclick="bcv\(([0-9]+?),([0-9]+?),([0-9]+?)\)">([^\n｝]*?)</ref｝([,-–;][ ]*?)([0-9]+?):([0-9]+?)([^0-9])', r'<ref onclick="bcv(\1,\2,\3)">\4</ref｝\5<ref onclick="bcv(\1,\6,\7)">\6:\7</ref｝\8', taggedText)
             taggedText = re.sub('<ref onclick="bcv\(([0-9]+?),([0-9]+?),([0-9]+?)\)">([^＊][^\n｝]*?)</ref｝([,-–;][ ]*?)([0-9]+?)([^:0-9])', r'<ref onclick="bcv(\1,\2,\3)">\4</ref｝\5<ref onclick="bcv(\1,\2,\6)">\6</ref｝\7', taggedText)
             taggedText = re.sub('<ref onclick="bcv\(([0-9]+?),([0-9]+?),([0-9]+?)\)">([^＊][^\n｝]*?)</ref｝([,-–;][ ]*?)([0-9]+?):([^0-9])', r'<ref onclick="bcv(\1,\2,\3)">\4</ref｝\5<ref onclick="bcv(\1,\2,\6)">\6</ref｝:\7', taggedText)
@@ -970,7 +960,7 @@ class BibleVerseParser:
             s = p.search(taggedText)
         
         # clear special markers
-        #self.updateWorkingIndicator()
+        self.updateWorkingIndicator()
         taggedText = re.sub('『[0-9]+?|([^\n『』]*?)』', r'\1', taggedText)
         taggedText = re.sub('(<ref onclick="bcv\([0-9]+?,[0-9]+?,[0-9]+?\)">)＊', r'\1', taggedText)
         taggedText = re.sub('</ref｝', '</ref>', taggedText)
@@ -1051,9 +1041,9 @@ if __name__ == '__main__':
     standardisation = input("Do you want to standardise the format of all bible verse references? [YES/NO] ")
 
     # create an instance of BibleVerseParser
-    Parser = BibleVerseParser(standardisation)
+    parser = BibleVerseParser(standardisation)
     # start parsing
-    Parser.startParsing(inputName)
+    parser.startParsing(inputName)
 
     # example of using extractAllReferences(text)
     # text = input("Enter text containing verse references: ")
@@ -1061,4 +1051,4 @@ if __name__ == '__main__':
     # print(verseReferences)
 
     # delete object
-    del Parser
+    del parser
