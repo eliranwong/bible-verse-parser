@@ -16,12 +16,18 @@ This script is now adapted to become a core utility in <a href="https://github.c
 7. Support standardisation of book abbreviations and verse reference format.
 8. Support parsing multiple files in one go.
 9. Support extracting all references in a text.  (This feature is especially useful for bulding indexes.)
+10. Support tagging on range(s) of verses
 
 # Main file: 
 <a href="https://github.com/eliranwong/bible-verse-parser/blob/master/BibleVerseParser.py">bible-verse-parser.py</a> [written with python version 3.6.5]
 
 # Usage:
 Command line: python bible-verse-parser.py
+
+# Format of tagging:
+e.g. John 3:16 is tagged as <ref onclick="bcv(43,3,16)">John 3:16</ref>
+e.g. John 3:14-16 is tagged as <ref onclick="bcv(43,3,14,3,16)">John 3:14-16</ref>
+e.g. John 3:14-4:3 is tagged as <ref onclick="bcv(43,3,14,4,3)">John 3:14-4:3</ref>
 
 # User Interaction:
 Prompting question (1) "Enter a file / folder name here: "<br>
