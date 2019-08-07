@@ -22,7 +22,7 @@ This script is now adapted to become a core utility in <a href="https://github.c
 <a href="https://github.com/eliranwong/bible-verse-parser/blob/master/BibleVerseParser.py">bible-verse-parser.py</a> [written with python version 3.6.5]
 
 # Usage:
-Command line: python bible-verse-parser.py
+Command line: python3 bible-verse-parser.py
 
 # Format of tagging:
 e.g. John 3:16 is tagged as &lt;ref onclick="bcv(43,3,16)"&gt;John 3:16&lt;/ref&gt;<br>
