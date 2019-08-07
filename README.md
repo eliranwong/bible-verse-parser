@@ -25,9 +25,9 @@ This script is now adapted to become a core utility in <a href="https://github.c
 Command line: python bible-verse-parser.py
 
 # Format of tagging:
-e.g. John 3:16 is tagged as <ref onclick="bcv(43,3,16)">John 3:16</ref>
-e.g. John 3:14-16 is tagged as <ref onclick="bcv(43,3,14,3,16)">John 3:14-16</ref>
-e.g. John 3:14-4:3 is tagged as <ref onclick="bcv(43,3,14,4,3)">John 3:14-4:3</ref>
+e.g. John 3:16 is tagged as &lt;ref onclick="bcv(43,3,16)"&gt;John 3:16&lt;/ref&gt;<br>
+e.g. John 3:14-16 is tagged as &lt;ref onclick="bcv(43,3,14,3,16)"&gt;John 3:14-16&lt;/ref&gt;<br>
+e.g. John 3:14-4:3 is tagged as &lt;ref onclick="bcv(43,3,14,4,3)"&gt;John 3:14-4:3&lt;/ref&gt;
 
 # User Interaction:
 Prompting question (1) "Enter a file / folder name here: "<br>
