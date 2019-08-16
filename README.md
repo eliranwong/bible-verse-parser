@@ -39,6 +39,10 @@ Prompting question (2) "Do you want to standardise the format of all bible verse
 Enter YES if you want to standardise all verse references with SBL-style-abbreviations and common format like Gen 2:4; Deut 6:4, etc.<br>
 Any answers other than "YES" [case-insensitive] skip the standarisation.
 
+# Dart Version
+This bible-verse-parser is available in Dart programming language.<br>
+https://github.com/eliranwong/DartBible/blob/master/lib/BibleVerseParser.dart
+
 # A practical example:
 
 Copy files "bible-verse-parser.py" and "dictionary-for-testing.txt" and put in the same folder<br>
