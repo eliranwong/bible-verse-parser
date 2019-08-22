@@ -41,7 +41,7 @@ Any answers other than "YES" [case-insensitive] skip the standarisation.
 
 # Dart Version
 This bible-verse-parser is available in Dart programming language.<br>
-https://github.com/eliranwong/DartBible/blob/master/lib/BibleVerseParser.dart
+https://github.com/eliranwong/DartBible/blob/master/lib/BibleParser.dart
 
 # A practical example:
 
