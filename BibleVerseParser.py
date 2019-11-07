@@ -33,7 +33,7 @@ Any answers other than "YES" [case-insensitive] skip the standarisation.
 """
 
 # import modules, which are ESSENTIAL for running BibleVerseParser
-import re, glob, os
+import re, glob, os, sys
 from ast import literal_eval
 
 """
@@ -1887,11 +1887,19 @@ END - class BibleVerseParser
 """
 
 if __name__ == '__main__':
-    # Interaction with user
-    # ask for filename or folder name
-    inputName = input("Enter a file / folder name here: ")
-    # ask if standardising abbreviations and reference format
-    standardisation = input("Do you want to standardise the format of all bible verse references? [YES/NO] ")
+    inputName = ""
+    standardisation = "NO"
+
+    arguments = sys.argv
+
+    if (len(arguments) > 1):
+        inputName = " ".join(arguments[1:])
+    else:
+        # Interaction with user
+        # ask for filename or folder name
+        inputName = input("Enter a file / folder name here: ")
+        # ask if standardising abbreviations and reference format
+        standardisation = input("Do you want to standardise the format of all bible verse references? [YES/NO] ")
 
     # create an instance of BibleVerseParser
     parser = BibleVerseParser(standardisation)
