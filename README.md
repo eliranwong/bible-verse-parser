@@ -27,7 +27,7 @@ Tag a file, where [file] is the filename:
 
 > python3 BibleVerseParser.py [file]
 
-Tag all files in a folder, where [folder] is the filename:
+Tag all files in a folder, where [folder] is the folder name:
 
 > python3 BibleVerseParser.py [folder]
 
