@@ -25,15 +25,15 @@ This script is now adapted to become a core utility in <a href="https://github.c
 
 Tag a file, where [file] is the filename:
 
-> python3 bible-verse-parser.py [file]
+> python3 BibleVerseParser.py [file]
 
 Tag all files in a folder, where [folder] is the filename:
 
-> python3 bible-verse-parser.py [folder]
+> python3 BibleVerseParser.py [folder]
 
 Interactive Mode:
 
-> python3 bible-verse-parser.py
+> python3 BibleVerseParser.py
 
 # Format of tagging:
 e.g. John 3:16 is tagged as &lt;ref onclick="bcv(43,3,16)"&gt;John 3:16&lt;/ref&gt;<br>
