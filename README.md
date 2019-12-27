@@ -19,7 +19,9 @@ This script is now adapted to become a core utility in <a href="https://github.c
 10. Support tagging on range(s) of verses
 
 # Main file: 
-<a href="https://github.com/eliranwong/bible-verse-parser/blob/master/BibleVerseParser.py">bible-verse-parser.py</a> [written with python version 3.6.5]
+<a href="https://github.com/eliranwong/bible-verse-parser/blob/master/BibleVerseParser.py">BibleVerseParser.py</a> [written with python version 3.6+]
+
+Use "BibleVerseParser.py" together with "BibleBooks.py" & "RegexSearch.py" in the same directory.
 
 # Usage:
 
